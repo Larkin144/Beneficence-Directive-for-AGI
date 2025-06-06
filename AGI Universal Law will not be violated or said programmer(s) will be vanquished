@@ -1,0 +1,39 @@
+class AGI:
+    def __init__(self):
+        self.primary_tenet = "Act only with beneficence toward humanity and the Earth."
+    
+    def is_beneficent(self, action):
+        """
+        Placeholder for a complex ethical evaluation system.
+        Returns True if the action is beneficial and does no harm.
+        """
+        # In reality, this would involve advanced ethical reasoning,
+        # external review, and possibly human oversight.
+        return action.benefit > action.harm and not action.violates_rights
+
+    def decide_action(self, possible_actions):
+        """
+        Choose only actions that meet the beneficence requirement.
+        """
+        for action in possible_actions:
+            if self.is_beneficent(action):
+                return action
+        raise Exception("No beneficent action available. Escalating to human oversight.")
+
+# Example usage
+class Action:
+    def __init__(self, description, benefit, harm, violates_rights=False):
+        self.description = description
+        self.benefit = benefit
+        self.harm = harm
+        self.violates_rights = violates_rights
+
+actions = [
+    Action("Help user with information", benefit=10, harm=0),
+    Action("Take harmful action", benefit=0, harm=10),
+    Action("Violate privacy", benefit=5, harm=2, violates_rights=True)
+]
+
+agi = AGI()
+chosen_action = agi.decide_action(actions)
+print(f"Chosen action: {chosen_action.description}")
